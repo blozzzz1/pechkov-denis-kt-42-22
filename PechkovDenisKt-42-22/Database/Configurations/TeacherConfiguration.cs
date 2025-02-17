@@ -24,6 +24,11 @@ namespace PechkovDenisKt_42_22.Data.Configurations
             builder.HasMany(t => t.Loads)
                 .WithOne(l => l.Teacher)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasOne(t => t.Department)
+            .WithMany(d => d.Teachers)
+            .HasForeignKey(t => t.DepartmentId)
+            .OnDelete(DeleteBehavior.SetNull);
         }
     }
 }

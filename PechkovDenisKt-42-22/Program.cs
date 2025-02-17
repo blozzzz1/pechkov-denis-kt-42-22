@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using NLog;
 using NLog.Web;
 using PechkovDenisKt_42_22.Database;
+using PechkovDenisKt_42_22.ServiceExtensions;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,6 +24,8 @@ try {
 
     builder.Services.AddDbContext<UniversityContext>(options =>
         options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+    builder.Services.AddServices();
 
     var app = builder.Build();
 

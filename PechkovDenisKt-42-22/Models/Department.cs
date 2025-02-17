@@ -13,7 +13,7 @@ namespace PechkovDenisKt_42_22.Models
 
         public DateTime FoundedDate { get; set; }
 
-        public int HeadId { get; set; }
+        public int? HeadId { get; set; }
 
         [ForeignKey("HeadId")]
         public virtual Teacher Head { get; set; }

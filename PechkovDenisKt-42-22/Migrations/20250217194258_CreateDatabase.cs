@@ -45,7 +45,7 @@ namespace PechkovDenisKt_42_22.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FoundedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    HeadId = table.Column<int>(type: "int", nullable: false)
+                    HeadId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -78,7 +78,7 @@ namespace PechkovDenisKt_42_22.Migrations
                         column: x => x.DepartmentId,
                         principalTable: "Departments",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Teachers_Positions_PositionId",
                         column: x => x.PositionId,
@@ -175,8 +175,7 @@ namespace PechkovDenisKt_42_22.Migrations
                 table: "Departments",
                 column: "HeadId",
                 principalTable: "Teachers",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                principalColumn: "Id");
         }
 
         /// <inheritdoc />

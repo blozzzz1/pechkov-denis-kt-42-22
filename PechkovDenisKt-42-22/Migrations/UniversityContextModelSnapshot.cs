@@ -50,7 +50,7 @@ namespace PechkovDenisKt_42_22.Migrations
                     b.Property<DateTime>("FoundedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("HeadId")
+                    b.Property<int?>("HeadId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -143,7 +143,8 @@ namespace PechkovDenisKt_42_22.Migrations
                     b.Property<int>("DegreeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("DepartmentId")
+                    b.Property<int?>("DepartmentId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("FirstName")
@@ -172,9 +173,7 @@ namespace PechkovDenisKt_42_22.Migrations
                 {
                     b.HasOne("PechkovDenisKt_42_22.Models.Teacher", "Head")
                         .WithMany()
-                        .HasForeignKey("HeadId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("HeadId");
 
                     b.Navigation("Head");
                 });
@@ -220,7 +219,7 @@ namespace PechkovDenisKt_42_22.Migrations
                     b.HasOne("PechkovDenisKt_42_22.Models.Department", "Department")
                         .WithMany("Teachers")
                         .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.SetNull)
                         .IsRequired();
 
                     b.HasOne("PechkovDenisKt_42_22.Models.Position", "Position")

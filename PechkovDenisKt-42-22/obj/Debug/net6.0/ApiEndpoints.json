@@ -1,5 +1,22 @@
 [
   {
+    "ContainingType": "PechkovDenisKt_42_22.Controllers.TeacherController",
+    "Method": "GetTeachersByName",
+    "RelativePath": "Teacher",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "filter",
+        "Type": "PechkovDenisKt_42_22.Filters.TeacherFilters.TeacherNameFilter",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [],
+    "EndpointName": "GetTeachersByName"
+  },
+  {
     "ContainingType": "PechkovDenisKt_42_22.Controllers.WeatherForecastController",
     "Method": "Get",
     "RelativePath": "WeatherForecast",
