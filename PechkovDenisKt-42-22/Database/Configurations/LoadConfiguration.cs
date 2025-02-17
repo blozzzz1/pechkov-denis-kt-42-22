@@ -6,6 +6,7 @@ namespace PechkovDenisKt_42_22.Database.Configurations
 {
     public class LoadConfiguration : IEntityTypeConfiguration<Load>
     {
+        private const string TableName = "Loads";
         public void Configure(EntityTypeBuilder<Load> builder)
         {
             builder.HasKey(l => l.Id);
@@ -14,14 +15,14 @@ namespace PechkovDenisKt_42_22.Database.Configurations
                 .IsRequired();
 
             builder.HasOne(l => l.Teacher)
-                .WithMany()
-                .HasForeignKey("TeacherId")
-                .OnDelete(DeleteBehavior.Cascade);
+                .WithMany(t => t.Loads)
+                .HasForeignKey(l => l.TeacherId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(l => l.Discipline)
-                .WithMany()
-                .HasForeignKey("DisciplineId")
-                .OnDelete(DeleteBehavior.Cascade);
+                .WithMany(d => d.Loads)
+                .HasForeignKey(l => l.DisciplineId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

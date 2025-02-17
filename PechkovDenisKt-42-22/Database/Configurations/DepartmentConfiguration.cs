@@ -6,22 +6,21 @@ namespace PechkovDenisKt_42_22.Database.Configurations
 {
     public class DepartmentConfiguration : IEntityTypeConfiguration<Department>
     {
+        private const string TableName = "Departments";
         public void Configure(EntityTypeBuilder<Department> builder)
         {
             builder.HasKey(d => d.Id);
 
             builder.Property(d => d.Name)
-                .IsRequired()
-                .HasMaxLength(100);
-
-            builder.Property(d => d.FoundationDate)
                 .IsRequired();
 
-            // Убедитесь, что в Teacher есть свойство DepartmentId
+            builder.Property(d => d.FoundedDate)
+                .IsRequired();
+
             builder.HasMany(d => d.Teachers)
                 .WithOne(t => t.Department)
-                .HasForeignKey(t => t.Department.id) // Используйте DepartmentId
-                .OnDelete(DeleteBehavior.SetNull);
+                .HasForeignKey(t => t.DepartmentId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
