@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\j-classroom\\Downloads\\samp\\PechkovDenisKt-42-22\\PechkovDenisKt-42-22\\PechkovDenisKt-42-22.csproj": {}
+    "C:\\Users\\j-classroom\\source\\repos\\pechkov-denis-kt-42-22\\PechkovDenisKt-42-22\\PechkovDenisKt-42-22.csproj": {}
   },
   "projects": {
-    "C:\\Users\\j-classroom\\Downloads\\samp\\PechkovDenisKt-42-22\\PechkovDenisKt-42-22\\PechkovDenisKt-42-22.csproj": {
+    "C:\\Users\\j-classroom\\source\\repos\\pechkov-denis-kt-42-22\\PechkovDenisKt-42-22\\PechkovDenisKt-42-22.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\j-classroom\\Downloads\\samp\\PechkovDenisKt-42-22\\PechkovDenisKt-42-22\\PechkovDenisKt-42-22.csproj",
+        "projectUniqueName": "C:\\Users\\j-classroom\\source\\repos\\pechkov-denis-kt-42-22\\PechkovDenisKt-42-22\\PechkovDenisKt-42-22.csproj",
         "projectName": "PechkovDenisKt-42-22",
-        "projectPath": "C:\\Users\\j-classroom\\Downloads\\samp\\PechkovDenisKt-42-22\\PechkovDenisKt-42-22\\PechkovDenisKt-42-22.csproj",
+        "projectPath": "C:\\Users\\j-classroom\\source\\repos\\pechkov-denis-kt-42-22\\PechkovDenisKt-42-22\\PechkovDenisKt-42-22.csproj",
         "packagesPath": "C:\\Users\\j-classroom\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\j-classroom\\Downloads\\samp\\PechkovDenisKt-42-22\\PechkovDenisKt-42-22\\obj\\",
+        "outputPath": "C:\\Users\\j-classroom\\source\\repos\\pechkov-denis-kt-42-22\\PechkovDenisKt-42-22\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -45,6 +45,26 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.20, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.2, )"
+            },
+            "NLog.Web.AspNetCore": {
+              "target": "Package",
+              "version": "[5.4.0, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.5.0, )"
