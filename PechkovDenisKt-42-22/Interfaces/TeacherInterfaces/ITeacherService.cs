@@ -11,8 +11,7 @@ namespace PechkovDenisKt_42_22.Interfaces.TeacherInterfaces
 {
     public interface ITeacherService
     {
-        public Task<Teacher[]> GetTeachersByNameAsync(TeacherNameFilter filter, CancellationToken cancellationToken);
-
+        Task<IEnumerable<Teacher>> GetTeachersAsync(TeacherFilter filter, CancellationToken cancellationToken); 
     }
 
     public class TeacherService : ITeacherService
@@ -24,16 +23,36 @@ namespace PechkovDenisKt_42_22.Interfaces.TeacherInterfaces
             _dbContext = dbContext;
         }
 
-
-
-        public async Task<Teacher[]> GetTeachersByNameAsync(TeacherNameFilter filter, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<Teacher>> GetTeachersAsync(TeacherFilter filter, CancellationToken cancellationToken = default)
         {
-            
-            var teachers = await _dbContext.Set<Teacher>()
-               .Where(w => w.FirstName == filter.FirstName)
-               .ToArrayAsync(cancellationToken);
+            var query = _dbContext.Set<Teacher>().AsQueryable();
 
-            return teachers;
+            if (!string.IsNullOrEmpty(filter.FirstName))
+            {
+                query = query.Where(t => t.FirstName.Contains(filter.FirstName));
+            }
+
+            if (!string.IsNullOrEmpty(filter.LastName))
+            {
+                query = query.Where(t => t.LastName.Contains(filter.LastName));
+            }
+
+            if (filter.DegreeId.HasValue)
+            {
+                query = query.Where(t => t.DegreeId == filter.DegreeId.Value);
+            }
+
+            if (filter.PositionId.HasValue)
+            {
+                query = query.Where(t => t.PositionId == filter.PositionId.Value);
+            }
+
+            if (filter.DepartmentId.HasValue)
+            {
+                query = query.Where(t => t.DepartmentId == filter.DepartmentId.Value);
+            }
+
+            return await query.ToArrayAsync(cancellationToken); // Это все еще будет работать, так как IEnumerable<Teacher> может быть создан из массива
         }
     }
 

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PechkovDenisKt-42-22")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+919fd765efa28ac8548e63f5c139bb474b4cea6b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3689656024e202d6f7ccfdfb61ff0b734a3d6fd4")]
 [assembly: System.Reflection.AssemblyProductAttribute("PechkovDenisKt-42-22")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PechkovDenisKt-42-22")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

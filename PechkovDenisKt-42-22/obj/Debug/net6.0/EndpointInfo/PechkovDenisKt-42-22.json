@@ -5,27 +5,27 @@
     "version": "1.0"
   },
   "paths": {
-    "/Teacher": {
+    "/Teacher/search": {
       "post": {
         "tags": [
           "Teacher"
         ],
-        "operationId": "GetTeachersByName",
+        "operationId": "SearchTeachers",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/TeacherNameFilter"
+                "$ref": "#/components/schemas/TeacherFilter"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/TeacherNameFilter"
+                "$ref": "#/components/schemas/TeacherFilter"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/TeacherNameFilter"
+                "$ref": "#/components/schemas/TeacherFilter"
               }
             }
           }
@@ -125,11 +125,30 @@
   },
   "components": {
     "schemas": {
-      "TeacherNameFilter": {
+      "TeacherFilter": {
         "type": "object",
         "properties": {
           "firstName": {
             "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "degreeId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "positionId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "departmentId": {
+            "type": "integer",
+            "format": "int32",
             "nullable": true
           }
         },

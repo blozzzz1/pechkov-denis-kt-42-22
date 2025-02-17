@@ -18,10 +18,10 @@ namespace PechkovDenisKt_42_22.Controllers
             _teacherService = teacherService;
         }
 
-        [HttpPost(Name = "GetTeachersByName")]
-        public async Task<IActionResult> GetTeachersByName(TeacherNameFilter filter, CancellationToken cancellationToken = default)
+        [HttpPost("search", Name = "SearchTeachers")]
+        public async Task<IActionResult> SearchTeachers(TeacherFilter filter, CancellationToken cancellationToken = default)
         {
-            var teachers = await _teacherService.GetTeachersByNameAsync(filter, cancellationToken);
+            var teachers = await _teacherService.GetTeachersAsync(filter, cancellationToken);
             return Ok(teachers);
         }
     }
