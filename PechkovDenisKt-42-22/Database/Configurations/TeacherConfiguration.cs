@@ -26,9 +26,9 @@ namespace PechkovDenisKt_42_22.Data.Configurations
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasOne(t => t.Department)
-            .WithMany(d => d.Teachers)
-            .HasForeignKey(t => t.DepartmentId)
-            .OnDelete(DeleteBehavior.SetNull);
+                .WithMany(d => d.Teachers)
+                .HasForeignKey(t => t.DepartmentId)
+                .OnDelete(DeleteBehavior.Cascade); 
         }
     }
 }

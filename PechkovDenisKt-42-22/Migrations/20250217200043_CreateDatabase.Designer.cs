@@ -12,7 +12,7 @@ using PechkovDenisKt_42_22.Database;
 namespace PechkovDenisKt_42_22.Migrations
 {
     [DbContext(typeof(UniversityContext))]
-    [Migration("20250217194258_CreateDatabase")]
+    [Migration("20250217200043_CreateDatabase")]
     partial class CreateDatabase
     {
         /// <inheritdoc />
@@ -222,7 +222,7 @@ namespace PechkovDenisKt_42_22.Migrations
                     b.HasOne("PechkovDenisKt_42_22.Models.Department", "Department")
                         .WithMany("Teachers")
                         .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.SetNull)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("PechkovDenisKt_42_22.Models.Position", "Position")

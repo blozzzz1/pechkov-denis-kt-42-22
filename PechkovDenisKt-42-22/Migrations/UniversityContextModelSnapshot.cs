@@ -219,7 +219,7 @@ namespace PechkovDenisKt_42_22.Migrations
                     b.HasOne("PechkovDenisKt_42_22.Models.Department", "Department")
                         .WithMany("Teachers")
                         .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.SetNull)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("PechkovDenisKt_42_22.Models.Position", "Position")

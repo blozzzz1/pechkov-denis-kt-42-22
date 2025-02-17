@@ -27,6 +27,7 @@ namespace PechkovDenisKt_42_22.Models
         public int? DepartmentId { get; set; } // Добавлено свойство для связи с кафедрой
 
         [ForeignKey("DepartmentId")]
+
         public virtual Department Department { get; set; } // Связь с кафедрой
 
         public virtual ICollection<Discipline> Disciplines { get; set; } = new List<Discipline>();

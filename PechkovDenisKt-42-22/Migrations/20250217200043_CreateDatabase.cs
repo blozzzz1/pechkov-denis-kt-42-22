@@ -78,7 +78,7 @@ namespace PechkovDenisKt_42_22.Migrations
                         column: x => x.DepartmentId,
                         principalTable: "Departments",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.SetNull);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Teachers_Positions_PositionId",
                         column: x => x.PositionId,
