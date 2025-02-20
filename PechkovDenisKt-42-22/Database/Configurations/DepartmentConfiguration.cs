@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using PechkovDenisKt_42_22.Models;
+using System.Collections.Generic;
 
 namespace PechkovDenisKt_42_22.Database.Configurations
 {
@@ -17,10 +18,16 @@ namespace PechkovDenisKt_42_22.Database.Configurations
             builder.Property(d => d.FoundedDate)
                 .IsRequired();
 
+            
             builder.HasMany(d => d.Teachers)
                 .WithOne(t => t.Department)
                 .HasForeignKey(t => t.DepartmentId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasOne(d => d.Head)
+               .WithMany()
+            .HasForeignKey(d => d.HeadId)
+               .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PechkovDenisKt_42_22.Interfaces.TeacherInterfaces;
+using PechkovDenisKt_42_22.Services.TeacherServices;
 using PechkovDenisKt_42_22.Filters.TeacherFilters;
 
 

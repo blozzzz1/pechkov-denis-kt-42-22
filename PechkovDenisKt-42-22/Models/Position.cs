@@ -8,6 +8,6 @@ namespace PechkovDenisKt_42_22.Models
         public int Id { get; set; }
 
         [Required]
-        public string Name { get; set; } // Например, "Преподаватель", "Старший преподаватель", "Доцент", "Профессор"
+        public string Name { get; set; } 
     }
 }

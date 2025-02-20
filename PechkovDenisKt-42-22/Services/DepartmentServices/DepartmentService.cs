@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PechkovDenisKt_42_22.Database;
 using PechkovDenisKt_42_22.Filters.DepartmentFilters;
+using PechkovDenisKt_42_22.Models;
 
 
 namespace PechkovDenisKt_42_22.Services.DepartmentServices
@@ -42,6 +43,55 @@ namespace PechkovDenisKt_42_22.Services.DepartmentServices
 
             return departments;
         }
+
+        public async Task AddDepartmentAsync(Department department)
+        {
+            _context.Departments.Add(department);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<Department> UpdateDepartmentAsync(Department department)
+        {
+            var existingDepartment = await _context.Departments.FindAsync(department.Id);
+            if (existingDepartment == null)
+            {
+                return null;
+            }
+
+            existingDepartment.Name = department.Name;
+            existingDepartment.FoundedDate = department.FoundedDate;
+            existingDepartment.HeadId = department.HeadId; 
+
+            await _context.SaveChangesAsync();
+            return existingDepartment;
+        }
+
+        public async Task<bool> DeleteDepartmentAsync(int departmentId)
+        {
+            var department = await _context.Departments
+                .Include(d => d.Teachers)
+                .FirstOrDefaultAsync(d => d.Id == departmentId);
+
+            if (department == null)
+            {
+                return false; 
+            }
+
+            
+            department.HeadId = null;
+            await _context.SaveChangesAsync();
+
+            
+            _context.Teachers.RemoveRange(department.Teachers);
+            await _context.SaveChangesAsync();
+
+            
+            _context.Departments.Remove(department);
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
+
     }
 
 }

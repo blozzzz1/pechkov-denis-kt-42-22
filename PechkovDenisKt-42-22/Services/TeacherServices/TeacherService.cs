@@ -3,7 +3,7 @@ using PechkovDenisKt_42_22.Database;
 using PechkovDenisKt_42_22.Filters.TeacherFilters;
 
 
-namespace PechkovDenisKt_42_22.Interfaces.TeacherInterfaces
+namespace PechkovDenisKt_42_22.Services.TeacherServices
 {
 
     public class TeacherService

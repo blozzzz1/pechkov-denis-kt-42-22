@@ -21,6 +21,59 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "PechkovDenisKt_42_22.Controllers.DepartmentsController",
+    "Method": "AddDepartment",
+    "RelativePath": "api/Departments",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "createDepartmentDto",
+        "Type": "PechkovDenisKt_42_22.Models.DTO.CreateDepartmentDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PechkovDenisKt_42_22.Controllers.DepartmentsController",
+    "Method": "UpdateDepartment",
+    "RelativePath": "api/Departments/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "updateDepartmentDto",
+        "Type": "PechkovDenisKt_42_22.Models.DTO.UpdateDepartmentDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PechkovDenisKt_42_22.Controllers.DepartmentsController",
+    "Method": "DeleteDepartment",
+    "RelativePath": "api/Departments/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "PechkovDenisKt_42_22.Controllers.DisciplinesController",
     "Method": "GetDisciplines",
     "RelativePath": "api/Disciplines",
@@ -46,6 +99,37 @@
       {
         "Name": "maxHours",
         "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PechkovDenisKt_42_22.Controllers.LoadsController",
+    "Method": "GetLoads",
+    "RelativePath": "api/Loads",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "teacherFirstName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "teacherLastName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "departmentName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "disciplineName",
+        "Type": "System.String",
         "IsRequired": false
       }
     ],

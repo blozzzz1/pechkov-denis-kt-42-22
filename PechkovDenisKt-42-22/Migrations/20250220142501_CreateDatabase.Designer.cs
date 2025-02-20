@@ -12,7 +12,7 @@ using PechkovDenisKt_42_22.Database;
 namespace PechkovDenisKt_42_22.Migrations
 {
     [DbContext(typeof(UniversityContext))]
-    [Migration("20250220114452_CreateDatabase")]
+    [Migration("20250220142501_CreateDatabase")]
     partial class CreateDatabase
     {
         /// <inheritdoc />
@@ -168,7 +168,8 @@ namespace PechkovDenisKt_42_22.Migrations
                 {
                     b.HasOne("PechkovDenisKt_42_22.Models.Teacher", "Head")
                         .WithMany()
-                        .HasForeignKey("HeadId");
+                        .HasForeignKey("HeadId")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("Head");
                 });
@@ -178,13 +179,13 @@ namespace PechkovDenisKt_42_22.Migrations
                     b.HasOne("PechkovDenisKt_42_22.Models.Discipline", "Discipline")
                         .WithMany("Loads")
                         .HasForeignKey("DisciplineId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("PechkovDenisKt_42_22.Models.Teacher", "Teacher")
                         .WithMany("Loads")
                         .HasForeignKey("TeacherId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Discipline");

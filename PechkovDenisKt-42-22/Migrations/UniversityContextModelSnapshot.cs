@@ -165,7 +165,8 @@ namespace PechkovDenisKt_42_22.Migrations
                 {
                     b.HasOne("PechkovDenisKt_42_22.Models.Teacher", "Head")
                         .WithMany()
-                        .HasForeignKey("HeadId");
+                        .HasForeignKey("HeadId")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("Head");
                 });
@@ -175,13 +176,13 @@ namespace PechkovDenisKt_42_22.Migrations
                     b.HasOne("PechkovDenisKt_42_22.Models.Discipline", "Discipline")
                         .WithMany("Loads")
                         .HasForeignKey("DisciplineId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("PechkovDenisKt_42_22.Models.Teacher", "Teacher")
                         .WithMany("Loads")
                         .HasForeignKey("TeacherId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Discipline");

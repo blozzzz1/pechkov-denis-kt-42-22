@@ -24,11 +24,11 @@ namespace PechkovDenisKt_42_22.Models
         [ForeignKey("PositionId")]
         public virtual Position Position { get; set; }
 
-        public int? DepartmentId { get; set; } // Добавлено свойство для связи с кафедрой
+        public int? DepartmentId { get; set; } 
 
         [ForeignKey("DepartmentId")]
 
-        public virtual Department Department { get; set; } // Связь с кафедрой
+        public virtual Department Department { get; set; } 
 
         public virtual ICollection<Load> Loads { get; set; } = new List<Load>();
     }

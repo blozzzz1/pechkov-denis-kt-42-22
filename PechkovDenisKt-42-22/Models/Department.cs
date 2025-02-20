@@ -16,7 +16,7 @@ namespace PechkovDenisKt_42_22.Models
         public int? HeadId { get; set; }
 
         [ForeignKey("HeadId")]
-        public virtual Teacher Head { get; set; }
+        public virtual Teacher? Head { get; set; }
 
         public virtual ICollection<Teacher> Teachers { get; set; } = new List<Teacher>();
     }

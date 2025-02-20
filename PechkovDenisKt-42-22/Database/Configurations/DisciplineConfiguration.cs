@@ -10,18 +10,18 @@ namespace PechkovDenisKt_42_22.Database.Configurations
 
         public void Configure(EntityTypeBuilder<Discipline> builder)
         {
-            builder.ToTable(TableName); // Убедитесь, что таблица называется "Disciplines"
+            builder.ToTable(TableName); 
 
             builder.HasKey(d => d.Id);
 
             builder.Property(d => d.Name)
                 .IsRequired();
 
-            // Связь с нагрузками
+            
             builder.HasMany(d => d.Loads)
                 .WithOne(l => l.Discipline)
-                .HasForeignKey(l => l.DisciplineId) // Указываем внешний ключ
-                .OnDelete(DeleteBehavior.Cascade); // Удаление нагрузки при удалении дисциплины
+                .HasForeignKey(l => l.DisciplineId) 
+                .OnDelete(DeleteBehavior.Cascade); 
         }
     }
 }
