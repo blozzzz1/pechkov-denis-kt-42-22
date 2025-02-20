@@ -5,31 +5,34 @@
     "version": "1.0"
   },
   "paths": {
-    "/Teacher/search": {
-      "post": {
+    "/api/Teachers": {
+      "get": {
         "tags": [
-          "Teacher"
+          "Teachers"
         ],
-        "operationId": "SearchTeachers",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TeacherFilter"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TeacherFilter"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/TeacherFilter"
-              }
+        "parameters": [
+          {
+            "name": "departmentName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "degreeName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "positionName",
+            "in": "query",
+            "schema": {
+              "type": "string"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "description": "Success"
@@ -125,35 +128,6 @@
   },
   "components": {
     "schemas": {
-      "TeacherFilter": {
-        "type": "object",
-        "properties": {
-          "firstName": {
-            "type": "string",
-            "nullable": true
-          },
-          "lastName": {
-            "type": "string",
-            "nullable": true
-          },
-          "degreeId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "positionId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "departmentId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
       "WeatherForecast": {
         "type": "object",
         "properties": {

@@ -1,20 +1,29 @@
 [
   {
-    "ContainingType": "PechkovDenisKt_42_22.Controllers.TeacherController",
-    "Method": "SearchTeachers",
-    "RelativePath": "Teacher/search",
-    "HttpMethod": "POST",
+    "ContainingType": "PechkovDenisKt_42_22.Controllers.TeachersController",
+    "Method": "GetTeachers",
+    "RelativePath": "api/Teachers",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "filter",
-        "Type": "PechkovDenisKt_42_22.Filters.TeacherFilters.TeacherFilter",
-        "IsRequired": true
+        "Name": "departmentName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "degreeName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "positionName",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
-    "ReturnTypes": [],
-    "EndpointName": "SearchTeachers"
+    "ReturnTypes": []
   },
   {
     "ContainingType": "PechkovDenisKt_42_22.Controllers.WeatherForecastController",
