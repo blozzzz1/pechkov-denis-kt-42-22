@@ -18,6 +18,6 @@ namespace PechkovDenisKt_42_22.Models
         [ForeignKey("DisciplineId")]
         public virtual Discipline Discipline { get; set; }
 
-        public int Hours { get; set; } // Нагрузка в часах
+        public int Hours { get; set; } 
     }
 }

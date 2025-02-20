@@ -17,10 +17,6 @@ namespace PechkovDenisKt_42_22.Data.Configurations
             builder.Property(t => t.LastName)
                 .IsRequired();
 
-            builder.HasMany(t => t.Disciplines)
-                .WithOne(d => d.Teacher)
-                .OnDelete(DeleteBehavior.Cascade);
-
             builder.HasMany(t => t.Loads)
                 .WithOne(l => l.Teacher)
                 .OnDelete(DeleteBehavior.Cascade);

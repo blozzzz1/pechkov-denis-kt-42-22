@@ -25,6 +25,19 @@ namespace PechkovDenisKt_42_22.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Disciplines",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Disciplines", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Positions",
                 columns: table => new
                 {
@@ -88,27 +101,6 @@ namespace PechkovDenisKt_42_22.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Disciplines",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TeacherId = table.Column<int>(type: "int", nullable: false),
-                    LoadHours = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Disciplines", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Disciplines_Teachers_TeacherId",
-                        column: x => x.TeacherId,
-                        principalTable: "Teachers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Loads",
                 columns: table => new
                 {
@@ -139,11 +131,6 @@ namespace PechkovDenisKt_42_22.Migrations
                 name: "IX_Departments_HeadId",
                 table: "Departments",
                 column: "HeadId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Disciplines_TeacherId",
-                table: "Disciplines",
-                column: "TeacherId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Loads_DisciplineId",

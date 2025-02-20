@@ -1,10 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using PechkovDenisKt_42_22.Database;
 using PechkovDenisKt_42_22.Filters.TeacherFilters;
-using PechkovDenisKt_42_22.Models;
-using PechkovDenisKt_42_22.Controllers;
 
 
 namespace PechkovDenisKt_42_22.Interfaces.TeacherInterfaces

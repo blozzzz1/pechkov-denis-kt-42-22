@@ -12,7 +12,7 @@ using PechkovDenisKt_42_22.Database;
 namespace PechkovDenisKt_42_22.Migrations
 {
     [DbContext(typeof(UniversityContext))]
-    [Migration("20250217200043_CreateDatabase")]
+    [Migration("20250220114452_CreateDatabase")]
     partial class CreateDatabase
     {
         /// <inheritdoc />
@@ -75,21 +75,13 @@ namespace PechkovDenisKt_42_22.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("LoadHours")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TeacherId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("TeacherId");
-
-                    b.ToTable("Disciplines");
+                    b.ToTable("Disciplines", (string)null);
                 });
 
             modelBuilder.Entity("PechkovDenisKt_42_22.Models.Load", b =>
@@ -115,7 +107,7 @@ namespace PechkovDenisKt_42_22.Migrations
 
                     b.HasIndex("TeacherId");
 
-                    b.ToTable("Loads");
+                    b.ToTable("Loads", (string)null);
                 });
 
             modelBuilder.Entity("PechkovDenisKt_42_22.Models.Position", b =>
@@ -181,17 +173,6 @@ namespace PechkovDenisKt_42_22.Migrations
                     b.Navigation("Head");
                 });
 
-            modelBuilder.Entity("PechkovDenisKt_42_22.Models.Discipline", b =>
-                {
-                    b.HasOne("PechkovDenisKt_42_22.Models.Teacher", "Teacher")
-                        .WithMany("Disciplines")
-                        .HasForeignKey("TeacherId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Teacher");
-                });
-
             modelBuilder.Entity("PechkovDenisKt_42_22.Models.Load", b =>
                 {
                     b.HasOne("PechkovDenisKt_42_22.Models.Discipline", "Discipline")
@@ -250,8 +231,6 @@ namespace PechkovDenisKt_42_22.Migrations
 
             modelBuilder.Entity("PechkovDenisKt_42_22.Models.Teacher", b =>
                 {
-                    b.Navigation("Disciplines");
-
                     b.Navigation("Loads");
                 });
 #pragma warning restore 612, 618
