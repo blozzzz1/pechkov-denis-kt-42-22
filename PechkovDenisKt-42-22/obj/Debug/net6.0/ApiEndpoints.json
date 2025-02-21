@@ -105,6 +105,75 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "PechkovDenisKt_42_22.Controllers.DisciplinesController",
+    "Method": "AddDiscipline",
+    "RelativePath": "api/Disciplines",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "disciplineDto",
+        "Type": "PechkovDenisKt_42_22.Models.DTO.DisciplineDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PechkovDenisKt_42_22.Controllers.DisciplinesController",
+    "Method": "GetDisciplineById",
+    "RelativePath": "api/Disciplines/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PechkovDenisKt_42_22.Controllers.DisciplinesController",
+    "Method": "UpdateDiscipline",
+    "RelativePath": "api/Disciplines/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "disciplineDto",
+        "Type": "PechkovDenisKt_42_22.Models.DTO.DisciplineDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PechkovDenisKt_42_22.Controllers.DisciplinesController",
+    "Method": "DeleteDiscipline",
+    "RelativePath": "api/Disciplines/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "PechkovDenisKt_42_22.Controllers.LoadsController",
     "Method": "GetLoads",
     "RelativePath": "api/Loads",
@@ -136,6 +205,43 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "PechkovDenisKt_42_22.Controllers.LoadsController",
+    "Method": "AddLoad",
+    "RelativePath": "api/Loads",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "loadDto",
+        "Type": "PechkovDenisKt_42_22.Models.DTO.LoadDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PechkovDenisKt_42_22.Controllers.LoadsController",
+    "Method": "UpdateLoad",
+    "RelativePath": "api/Loads/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "loadDto",
+        "Type": "PechkovDenisKt_42_22.Models.DTO.LoadDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "PechkovDenisKt_42_22.Controllers.TeachersController",
     "Method": "GetTeachers",
     "RelativePath": "api/Teachers",
@@ -157,6 +263,85 @@
         "Name": "positionName",
         "Type": "System.String",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PechkovDenisKt_42_22.Controllers.TeachersController",
+    "Method": "AddTeacher",
+    "RelativePath": "api/Teachers",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "teacherDto",
+        "Type": "PechkovDenisKt_42_22.Models.DTO.TeacherDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PechkovDenisKt_42_22.Controllers.TeachersController",
+    "Method": "GetTeacherById",
+    "RelativePath": "api/Teachers/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "PechkovDenisKt_42_22.Models.Teacher",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "PechkovDenisKt_42_22.Controllers.TeachersController",
+    "Method": "UpdateTeacher",
+    "RelativePath": "api/Teachers/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "teacherDto",
+        "Type": "PechkovDenisKt_42_22.Models.DTO.TeacherDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PechkovDenisKt_42_22.Controllers.TeachersController",
+    "Method": "DeleteTeacher",
+    "RelativePath": "api/Teachers/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []

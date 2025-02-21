@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PechkovDenisKt_42_22.Database;
 using PechkovDenisKt_42_22.Filters.DisciplineFilters;
+using PechkovDenisKt_42_22.Models;
+using PechkovDenisKt_42_22.Models.DTO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -52,6 +54,53 @@ namespace PechkovDenisKt_42_22.Services.DisciplineServices
             }).ToListAsync();
 
             return disciplines;
+        }
+
+        public async Task<Discipline> GetDisciplineByIdAsync(int id)
+        {
+            return await _context.Disciplines
+                .Include(d => d.Loads)
+                .ThenInclude(l => l.Teacher)
+                .FirstOrDefaultAsync(d => d.Id == id);
+        }
+
+        public async Task<Discipline> AddDisciplineAsync(DisciplineDto disciplineDto)
+        {
+            var discipline = new Discipline
+            {
+                Name = disciplineDto.Name
+            };
+
+            _context.Disciplines.Add(discipline);
+            await _context.SaveChangesAsync();
+            return discipline;
+        }
+
+        public async Task<Discipline> UpdateDisciplineAsync(int id, DisciplineDto disciplineDto)
+        {
+            var existingDiscipline = await _context.Disciplines.FindAsync(id);
+            if (existingDiscipline == null)
+            {
+                throw new KeyNotFoundException("Discipline not found");
+            }
+
+            existingDiscipline.Name = disciplineDto.Name;
+
+            await _context.SaveChangesAsync();
+            return existingDiscipline;
+        }
+
+        public async Task<bool> DeleteDisciplineAsync(int id)
+        {
+            var discipline = await _context.Disciplines.FindAsync(id);
+            if (discipline == null)
+            {
+                return false;
+            }
+
+            _context.Disciplines.Remove(discipline);
+            await _context.SaveChangesAsync();
+            return true;
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PechkovDenisKt_42_22.Database;
 using PechkovDenisKt_42_22.Filters.LoadFilters;
+using PechkovDenisKt_42_22.Models.DTO;
+using PechkovDenisKt_42_22.Models;
 
 
 namespace PechkovDenisKt_42_22.Services.LoadServices
@@ -53,5 +55,59 @@ namespace PechkovDenisKt_42_22.Services.LoadServices
 
             return loads;
         }
+
+
+        public async Task<LoadFilter> AddLoadAsync(int teacherId, int disciplineId, int hours)
+        {
+            var load = new Load
+            {
+                TeacherId = teacherId,
+                DisciplineId = disciplineId,
+                Hours = hours
+            };
+
+            _context.Loads.Add(load);
+            await _context.SaveChangesAsync();
+
+            return await GetLoadFilterAsync(load.Id);
+        }
+
+        public async Task<LoadFilter> UpdateLoadAsync(int loadId, int teacherId, int disciplineId, int hours)
+        {
+            var load = await _context.Loads.FindAsync(loadId);
+            if (load == null)
+            {
+                throw new KeyNotFoundException("Load not found");
+            }
+
+            load.TeacherId = teacherId;
+            load.DisciplineId = disciplineId;
+            load.Hours = hours;
+
+            _context.Loads.Update(load);
+            await _context.SaveChangesAsync();
+
+            return await GetLoadFilterAsync(load.Id);
+        }
+
+        private async Task<LoadFilter> GetLoadFilterAsync(int loadId)
+        {
+            return await _context.Loads
+                .Include(l => l.Teacher)
+                .ThenInclude(t => t.Department)
+                .Include(l => l.Discipline)
+                .Where(l => l.Id == loadId)
+                .Select(l => new LoadFilter
+                {
+                    Id = l.Id,
+                    TeacherName = $"{l.Teacher.FirstName} {l.Teacher.LastName}",
+                    DepartmentName = l.Teacher.Department.Name,
+                    DisciplineName = l.Discipline.Name,
+                    Hours = l.Hours
+                })
+                .FirstOrDefaultAsync();
+        }
+
+
     }
 }

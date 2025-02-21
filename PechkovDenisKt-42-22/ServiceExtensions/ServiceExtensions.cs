@@ -12,7 +12,7 @@ namespace PechkovDenisKt_42_22.ServiceExtensions
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
             
-            services.AddScoped<TeacherService, TeacherService>();
+            services.AddScoped<TeacherService>();
             
             services.AddScoped<DisciplineService>();
             services.AddScoped<LoadService>();

@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PechkovDenisKt_42_22.Database;
 using PechkovDenisKt_42_22.Filters.TeacherFilters;
+using PechkovDenisKt_42_22.Models;
+using PechkovDenisKt_42_22.Models.DTO;
 
 
 namespace PechkovDenisKt_42_22.Services.TeacherServices
@@ -49,6 +51,152 @@ namespace PechkovDenisKt_42_22.Services.TeacherServices
             }).ToListAsync();
 
             return teachers;
+        }
+
+        public async Task<Teacher> GetTeacherByIdAsync(int id)
+        {
+            return await _context.Teachers
+                .Include(t => t.Degree)
+                .Include(t => t.Position)
+                .Include(t => t.Department)
+                .FirstOrDefaultAsync(t => t.Id == id);
+        }
+
+        public async Task<TeacherResponseDto> AddTeacherAsync(string firstName, string lastName, int positionId, int degreeId, int? departmentId)
+        {
+            
+            var positionExists = await _context.Positions.AnyAsync(p => p.Id == positionId);
+            if (!positionExists)
+            {
+                throw new ArgumentException($"Должности с id {positionId} не существует.");
+            }
+
+            var degreeExists = await _context.Degrees.AnyAsync(d => d.Id == degreeId);
+            if (!degreeExists)
+            {
+                throw new ArgumentException($"Степени с id {degreeId} не существует.");
+            }
+
+            if (departmentId.HasValue)
+            {
+                var departmentExists = await _context.Departments.AnyAsync(d => d.Id == departmentId.Value);
+                if (!departmentExists)
+                {
+                    throw new ArgumentException($"Кафедры с id {departmentId} не существует.");
+                }
+            }
+
+            
+            var teacher = new Teacher
+            {
+                FirstName = firstName,
+                LastName = lastName,
+                PositionId = positionId,
+                DegreeId = degreeId,
+                DepartmentId = departmentId
+            };
+
+            _context.Teachers.Add(teacher);
+            await _context.SaveChangesAsync();
+
+            
+            var degree = await _context.Degrees.FindAsync(degreeId);
+            var position = await _context.Positions.FindAsync(positionId);
+            var department = departmentId.HasValue ? await _context.Departments.FindAsync(departmentId.Value) : null;
+
+            
+            var responseDto = new TeacherResponseDto
+            {
+                Id = teacher.Id,
+                FirstName = teacher.FirstName,
+                LastName = teacher.LastName,
+                DegreeId = teacher.DegreeId,
+                Degree = degree.Name,
+                PositionId = teacher.PositionId,
+                Position = position.Name, 
+                DepartmentId = teacher.DepartmentId,
+                Department = department.Name, 
+                Loads = new List<Load>() 
+            };
+
+            return responseDto;
+        }
+
+        public async Task<TeacherResponseDto> UpdateTeacherAsync(int id, string firstName, string lastName, int positionId, int degreeId, int? departmentId)
+        {
+            
+            var teacher = await _context.Teachers.FindAsync(id);
+            if (teacher == null)
+            {
+                return null; 
+            }
+
+            
+            var positionExists = await _context.Positions.AnyAsync(p => p.Id == positionId);
+            if (!positionExists)
+            {
+                throw new ArgumentException($"Должности с id {positionId} не существует.");
+            }
+
+            
+            var degreeExists = await _context.Degrees.AnyAsync(d => d.Id == degreeId);
+            if (!degreeExists)
+            {
+                throw new ArgumentException($"Степени с id {degreeId} не существует.");
+            }
+
+            
+            if (departmentId.HasValue)
+            {
+                var departmentExists = await _context.Departments.AnyAsync(d => d.Id == departmentId.Value);
+                if (!departmentExists)
+                {
+                    throw new ArgumentException($"Кафедры с id {departmentId} не существует.");
+                }
+            }
+
+            
+            teacher.FirstName = firstName;
+            teacher.LastName = lastName;
+            teacher.PositionId = positionId;
+            teacher.DegreeId = degreeId;
+            teacher.DepartmentId = departmentId;
+
+            
+            await _context.SaveChangesAsync();
+
+            
+            var degree = await _context.Degrees.FindAsync(degreeId);
+            var position = await _context.Positions.FindAsync(positionId);
+            var department = departmentId.HasValue ? await _context.Departments.FindAsync(departmentId.Value) : null;
+
+            
+            var responseDto = new TeacherResponseDto
+            {
+                Id = teacher.Id,
+                FirstName = teacher.FirstName,
+                LastName = teacher.LastName,
+                DegreeId = teacher.DegreeId,
+                Degree = degree.Name,
+                PositionId = teacher.PositionId,
+                Position = position.Name,
+                DepartmentId = teacher.DepartmentId,
+                Department = department.Name,
+                Loads = new List<Load>()
+            };
+
+            return responseDto;
+        }
+
+
+        public async Task DeleteTeacherAsync(int id)
+        {
+            var teacher = await _context.Teachers.FindAsync(id);
+            if (teacher != null)
+            {
+                _context.Teachers.Remove(teacher);
+                await _context.SaveChangesAsync();
+            }
         }
     }
 

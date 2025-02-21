@@ -17,17 +17,17 @@ namespace PechkovDenisKt_42_22.Database.Configurations
             builder.Property(l => l.Hours)
                 .IsRequired();
 
-            // Связь с учителем
+            
             builder.HasOne(l => l.Teacher)
                 .WithMany(t => t.Loads) 
                 .HasForeignKey(l => l.TeacherId)
                 .OnDelete(DeleteBehavior.Cascade); 
 
-            // Связь с дисциплиной
+            
             builder.HasOne(l => l.Discipline)
                 .WithMany(d => d.Loads) 
                 .HasForeignKey(l => l.DisciplineId)
-                .OnDelete(DeleteBehavior.Cascade); // Измените на Cascade, если хотите удалять нагрузки при удалении дисциплины
+                .OnDelete(DeleteBehavior.Cascade); 
         }
     }
 }
