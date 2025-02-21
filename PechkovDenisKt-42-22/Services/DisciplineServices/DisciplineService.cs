@@ -50,7 +50,10 @@ namespace PechkovDenisKt_42_22.Services.DisciplineServices
                 Id = d.Id,
                 Name = d.Name,
                 TotalHours = d.Loads.Sum(l => l.Hours),
-                Teachers = d.Loads.Select(l => $"{l.Teacher.FirstName} {l.Teacher.LastName}").ToList()
+                Teachers = d.Loads
+                    .Select(l => $"{l.Teacher.FirstName} {l.Teacher.LastName}")
+                    .Distinct()
+                    .ToList()
             }).ToListAsync();
 
             return disciplines;
