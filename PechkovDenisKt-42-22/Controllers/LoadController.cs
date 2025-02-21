@@ -28,7 +28,7 @@ namespace PechkovDenisKt_42_22.Controllers
         {
             if (loadDto == null || loadDto.Hours <= 0)
             {
-                return BadRequest("Invalid load data.");
+                return BadRequest("Некорректные данные нагрузки.");
             }
 
             var load = await _loadService.AddLoadAsync(loadDto.TeacherId, loadDto.DisciplineId, loadDto.Hours);
@@ -40,7 +40,7 @@ namespace PechkovDenisKt_42_22.Controllers
         {
             if (loadDto == null || loadDto.Hours <= 0)
             {
-                return BadRequest("Invalid load data.");
+                return BadRequest("Некорректные данные нагрузки.");
             }
 
             try
@@ -50,9 +50,8 @@ namespace PechkovDenisKt_42_22.Controllers
             }
             catch (KeyNotFoundException)
             {
-                return NotFound($"Load with id {id} not found.");
+                return NotFound($"Нагрузка с id {id} не найдена.");
             }
         }
-
     }
 }

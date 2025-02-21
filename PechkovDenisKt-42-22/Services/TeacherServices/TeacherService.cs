@@ -189,14 +189,16 @@ namespace PechkovDenisKt_42_22.Services.TeacherServices
         }
 
 
-        public async Task DeleteTeacherAsync(int id)
+        public async Task<bool> DeleteTeacherAsync(int id)
         {
             var teacher = await _context.Teachers.FindAsync(id);
             if (teacher != null)
             {
                 _context.Teachers.Remove(teacher);
                 await _context.SaveChangesAsync();
+                return true;
             }
+            return false;
         }
     }
 

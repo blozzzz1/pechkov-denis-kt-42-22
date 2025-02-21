@@ -31,7 +31,7 @@ namespace PechkovDenisKt_42_22.Controllers
             var discipline = await _disciplineService.GetDisciplineByIdAsync(id);
             if (discipline == null)
             {
-                return NotFound();
+                return NotFound("Дисциплина не найдена.");
             }
 
             var disciplineFilter = new DisciplineFilter
@@ -50,7 +50,7 @@ namespace PechkovDenisKt_42_22.Controllers
         {
             if (disciplineDto == null || string.IsNullOrEmpty(disciplineDto.Name))
             {
-                return BadRequest("Discipline is null or name is empty.");
+                return BadRequest("Дисциплина не указана или имя пустое.");
             }
 
             var createdDiscipline = await _disciplineService.AddDisciplineAsync(disciplineDto);
@@ -62,7 +62,7 @@ namespace PechkovDenisKt_42_22.Controllers
         {
             if (disciplineDto == null || string.IsNullOrEmpty(disciplineDto.Name))
             {
-                return BadRequest("Discipline is null or name is empty.");
+                return BadRequest("Дисциплина не указана или имя пустое.");
             }
 
             try
@@ -72,7 +72,7 @@ namespace PechkovDenisKt_42_22.Controllers
             }
             catch (KeyNotFoundException)
             {
-                return NotFound();
+                return NotFound("Дисциплина не найдена.");
             }
         }
 
@@ -82,11 +82,10 @@ namespace PechkovDenisKt_42_22.Controllers
             var result = await _disciplineService.DeleteDisciplineAsync(id);
             if (!result)
             {
-                return NotFound();
+                return NotFound("Дисциплина не найдена.");
             }
 
             return NoContent();
         }
-
     }
 }

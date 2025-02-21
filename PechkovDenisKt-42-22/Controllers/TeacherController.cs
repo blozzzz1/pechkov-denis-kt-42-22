@@ -4,7 +4,6 @@ using PechkovDenisKt_42_22.Filters.TeacherFilters;
 using PechkovDenisKt_42_22.Models;
 using PechkovDenisKt_42_22.Models.DTO;
 
-
 namespace PechkovDenisKt_42_22.Controllers
 {
     [ApiController]
@@ -41,7 +40,7 @@ namespace PechkovDenisKt_42_22.Controllers
         {
             if (teacherDto == null)
             {
-                return BadRequest("Invalid teacher data.");
+                return BadRequest("Некорректные данные учителя.");
             }
 
             var teacherResponse = await _teacherService.AddTeacherAsync(
@@ -52,7 +51,7 @@ namespace PechkovDenisKt_42_22.Controllers
                 teacherDto.DepartmentId
             );
 
-            return CreatedAtAction(nameof(AddTeacher), new { id = teacherResponse.Id }, teacherResponse);
+            return CreatedAtAction(nameof(GetTeacherById), new { id = teacherResponse.Id }, teacherResponse);
         }
 
         [HttpPut("{id}")]
@@ -60,7 +59,7 @@ namespace PechkovDenisKt_42_22.Controllers
         {
             if (teacherDto == null)
             {
-                return BadRequest("Invalid teacher data.");
+                return BadRequest("Некорректные данные учителя.");
             }
 
             var teacherResponse = await _teacherService.UpdateTeacherAsync(
@@ -74,7 +73,7 @@ namespace PechkovDenisKt_42_22.Controllers
 
             if (teacherResponse == null)
             {
-                return NotFound();
+                return NotFound($"Учитель с идентификатором {id} не найден.");
             }
 
             return Ok(teacherResponse);
@@ -83,7 +82,11 @@ namespace PechkovDenisKt_42_22.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteTeacher(int id)
         {
-            await _teacherService.DeleteTeacherAsync(id);
+            var result = await _teacherService.DeleteTeacherAsync(id);
+            if (!result)
+            {
+                return NotFound($"Учитель с идентификатором {id} не найден.");
+            }
             return NoContent();
         }
     }
