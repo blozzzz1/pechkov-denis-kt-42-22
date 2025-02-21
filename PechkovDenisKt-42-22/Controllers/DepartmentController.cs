@@ -47,14 +47,14 @@ namespace PechkovDenisKt_42_22.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateDepartment(int id, [FromBody] UpdateDepartmentDto updateDepartmentDto)
         {
-            if (updateDepartmentDto == null || id != updateDepartmentDto.Id)
+            if (updateDepartmentDto == null)
             {
-                return NotFound(new { message = "Кафедра не найдена" });
+                return BadRequest(new { message = "Данные для обновления не могут быть пустыми" });
             }
 
             var department = new Department
             {
-                Id = updateDepartmentDto.Id,
+                Id = id, 
                 Name = updateDepartmentDto.Name,
                 FoundedDate = updateDepartmentDto.FoundedDate,
                 HeadId = updateDepartmentDto.HeadId
@@ -63,11 +63,20 @@ namespace PechkovDenisKt_42_22.Controllers
             var updatedDepartment = await _departmentService.UpdateDepartmentAsync(department);
             if (updatedDepartment == null)
             {
-                return NotFound();
+                return NotFound(new { message = "Кафедра не найдена" });
             }
 
-            return NoContent();
+            
+            var updatedDepartmentDto = new CreateDepartmentDto
+            {
+                Name = updatedDepartment.Name,
+                FoundedDate = updatedDepartment.FoundedDate,
+                HeadId = updatedDepartment.HeadId
+            };
+
+            return Ok(updatedDepartmentDto); 
         }
+
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteDepartment(int id)

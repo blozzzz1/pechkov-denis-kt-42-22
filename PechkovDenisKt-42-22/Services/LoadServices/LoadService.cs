@@ -1,13 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PechkovDenisKt_42_22.Interfaces;
 using PechkovDenisKt_42_22.Database;
 using PechkovDenisKt_42_22.Filters.LoadFilters;
 using PechkovDenisKt_42_22.Models.DTO;
 using PechkovDenisKt_42_22.Models;
 
 
+
 namespace PechkovDenisKt_42_22.Services.LoadServices
 {
-    public class LoadService
+    public class LoadService : ILoadService
     {
         private readonly UniversityContext _context;
 

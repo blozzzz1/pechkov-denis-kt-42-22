@@ -2,11 +2,12 @@
 using PechkovDenisKt_42_22.Database;
 using PechkovDenisKt_42_22.Filters.DepartmentFilters;
 using PechkovDenisKt_42_22.Models;
+using PechkovDenisKt_42_22.Interfaces;
 
 
 namespace PechkovDenisKt_42_22.Services.DepartmentServices
 {
-    public class DepartmentService
+    public class DepartmentService : IDepartmentService
     {
         private readonly UniversityContext _context;
 
@@ -60,7 +61,7 @@ namespace PechkovDenisKt_42_22.Services.DepartmentServices
 
             existingDepartment.Name = department.Name;
             existingDepartment.FoundedDate = department.FoundedDate;
-            existingDepartment.HeadId = department.HeadId; 
+            existingDepartment.HeadId = department.HeadId;
 
             await _context.SaveChangesAsync();
             return existingDepartment;

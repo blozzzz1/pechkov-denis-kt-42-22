@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PechkovDenisKt_42_22.Database;
 using PechkovDenisKt_42_22.Filters.TeacherFilters;
+using PechkovDenisKt_42_22.Interfaces;
 using PechkovDenisKt_42_22.Models;
 using PechkovDenisKt_42_22.Models.DTO;
 
@@ -8,7 +9,7 @@ using PechkovDenisKt_42_22.Models.DTO;
 namespace PechkovDenisKt_42_22.Services.TeacherServices
 {
 
-    public class TeacherService
+    public class TeacherService : ITeacherService
     {
         private readonly UniversityContext _context;
 

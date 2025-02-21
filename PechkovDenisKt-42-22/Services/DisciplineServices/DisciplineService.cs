@@ -3,13 +3,14 @@ using PechkovDenisKt_42_22.Database;
 using PechkovDenisKt_42_22.Filters.DisciplineFilters;
 using PechkovDenisKt_42_22.Models;
 using PechkovDenisKt_42_22.Models.DTO;
+using PechkovDenisKt_42_22.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace PechkovDenisKt_42_22.Services.DisciplineServices
 {
-    public class DisciplineService
+    public class DisciplineService : IDisciplineService
     {
         private readonly UniversityContext _context;
 
@@ -50,7 +51,10 @@ namespace PechkovDenisKt_42_22.Services.DisciplineServices
                 Id = d.Id,
                 Name = d.Name,
                 TotalHours = d.Loads.Sum(l => l.Hours),
-                Teachers = d.Loads.Select(l => $"{l.Teacher.FirstName} {l.Teacher.LastName}").ToList()
+                Teachers = d.Loads
+                    .Select(l => $"{l.Teacher.FirstName} {l.Teacher.LastName}")
+                    .Distinct()
+                    .ToList()
             }).ToListAsync();
 
             return disciplines;
