@@ -49,7 +49,7 @@ namespace PechkovDenisKt_42_22.Controllers
         {
             if (updateDepartmentDto == null)
             {
-                return BadRequest(new { message = "Данные для обновления не могут быть пустыми" });
+                return BadRequest(new { message = "Данные для кафедры обновления не могут быть пустыми" });
             }
 
             var department = new Department

@@ -5,6 +5,8 @@ VisualStudioVersion = 17.7.34024.191
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PechkovDenisKt-42-22", "PechkovDenisKt-42-22\PechkovDenisKt-42-22.csproj", "{6FFC0CED-35CB-4552-8606-286DAB0FD9ED}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PechkovDenisKt-42-22.xUnitTests", "PechkovDenisKt-42-22.xUnitTests\PechkovDenisKt-42-22.xUnitTests.csproj", "{9AA58DD8-7ADD-41DD-A364-0B0A11A82769}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{6FFC0CED-35CB-4552-8606-286DAB0FD9ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6FFC0CED-35CB-4552-8606-286DAB0FD9ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6FFC0CED-35CB-4552-8606-286DAB0FD9ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AA58DD8-7ADD-41DD-A364-0B0A11A82769}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AA58DD8-7ADD-41DD-A364-0B0A11A82769}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AA58DD8-7ADD-41DD-A364-0B0A11A82769}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AA58DD8-7ADD-41DD-A364-0B0A11A82769}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
