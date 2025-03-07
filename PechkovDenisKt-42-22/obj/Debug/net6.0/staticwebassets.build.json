@@ -1,12 +1,11 @@
 {
   "Version": 1,
-  "Hash": "we6z4yLkpBmGfr2HGpgMy8OO9dqRvpU9C0pUYwVWz+g=",
+  "Hash": "QQzN1oD4DkZ+VxJmRRTlnHRqEcze8YD08S3AyUbk6SE=",
   "Source": "PechkovDenisKt-42-22",
   "BasePath": "_content/PechkovDenisKt-42-22",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [],
-  "Assets": [],
-  "Endpoints": []
+  "Assets": []
 }

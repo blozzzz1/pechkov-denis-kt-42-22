@@ -3,7 +3,8 @@ using PechkovDenisKt_42_22.Database;
 using PechkovDenisKt_42_22.Filters.DepartmentFilters;
 using PechkovDenisKt_42_22.Models;
 using PechkovDenisKt_42_22.Interfaces;
-
+using PechkovDenisKt_42_22.Models.DTO;
+using System.Globalization;
 
 namespace PechkovDenisKt_42_22.Services.DepartmentServices
 {
@@ -91,6 +92,53 @@ namespace PechkovDenisKt_42_22.Services.DepartmentServices
             await _context.SaveChangesAsync();
 
             return true;
+        }
+
+
+        public async Task<List<Department2Dto>> GetAllDepartmentsCompleteAsync(string departmentName, string teacherFirstName, string teacherLastName, string disciplineName)
+        {
+            var query = _context.Departments
+                .Include(d => d.Head)
+                .Include(d => d.Teachers)
+                    .ThenInclude(t => t.Loads)
+                        .ThenInclude(l => l.Discipline)
+                .AsQueryable();
+
+            if (!string.IsNullOrEmpty(departmentName))
+            {
+                query = query.Where(d => d.Name.Contains(departmentName));
+            }
+
+            if (!string.IsNullOrEmpty(teacherFirstName))
+            {
+                query = query.Where(t => t.Teachers.Any(teacher => teacher.FirstName.Contains(teacherFirstName)));
+            }
+
+            if (!string.IsNullOrEmpty(teacherLastName))
+            {
+                query = query.Where(t => t.Teachers.Any(teacher => teacher.LastName.Contains(teacherLastName)));
+            }
+
+            if (!string.IsNullOrEmpty(disciplineName))
+            {
+                query = query.Where(t => t.Teachers.Any(teacher => teacher.Loads.Any(load => load.Discipline.Name.Contains(disciplineName))));
+            }
+
+            return await query.Select(d => new Department2Dto
+            {
+                Name = d.Name,
+                HeadName = d.Head != null ? $"{d.Head.FirstName} {d.Head.LastName}" : "Нет",
+                Teachers = d.Teachers.Select(t => new Teacher2Dto
+                {
+                    FirstName = t.FirstName,
+                    LastName = t.LastName,
+                    Disciplines = t.Loads.Select(l => new Discipline2Dto
+                    {
+                        Name = l.Discipline.Name,
+                        Hours = l.Hours
+                    }).ToList()
+                }).ToList()
+            }).ToListAsync();
         }
 
     }

@@ -9097,23 +9097,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\DEXP\\.nuget\\packages\\": {},
+    "C:\\Users\\j-classroom\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Documents\\CSHARP\\newback\\PechkovDenisKt-42-22.xUnitTests\\PechkovDenisKt-42-22.xUnitTests.csproj",
+      "projectUniqueName": "C:\\Users\\j-classroom\\source\\repos\\pechkov-d-a-kt-42-22\\PechkovDenisKt-42-22.xUnitTests\\PechkovDenisKt-42-22.xUnitTests.csproj",
       "projectName": "PechkovDenisKt-42-22.xUnitTests",
-      "projectPath": "D:\\Documents\\CSHARP\\newback\\PechkovDenisKt-42-22.xUnitTests\\PechkovDenisKt-42-22.xUnitTests.csproj",
-      "packagesPath": "C:\\Users\\DEXP\\.nuget\\packages\\",
-      "outputPath": "D:\\Documents\\CSHARP\\newback\\PechkovDenisKt-42-22.xUnitTests\\obj\\",
+      "projectPath": "C:\\Users\\j-classroom\\source\\repos\\pechkov-d-a-kt-42-22\\PechkovDenisKt-42-22.xUnitTests\\PechkovDenisKt-42-22.xUnitTests.csproj",
+      "packagesPath": "C:\\Users\\j-classroom\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\j-classroom\\source\\repos\\pechkov-d-a-kt-42-22\\PechkovDenisKt-42-22.xUnitTests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\DEXP\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\j-classroom\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -9122,14 +9122,15 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\Documents\\CSHARP\\newback\\PechkovDenisKt-42-22\\PechkovDenisKt-42-22.csproj": {
-              "projectPath": "D:\\Documents\\CSHARP\\newback\\PechkovDenisKt-42-22\\PechkovDenisKt-42-22.csproj"
+            "C:\\Users\\j-classroom\\source\\repos\\pechkov-d-a-kt-42-22\\PechkovDenisKt-42-22\\PechkovDenisKt-42-22.csproj": {
+              "projectPath": "C:\\Users\\j-classroom\\source\\repos\\pechkov-d-a-kt-42-22\\PechkovDenisKt-42-22\\PechkovDenisKt-42-22.csproj"
             }
           }
         }
@@ -9138,13 +9139,7 @@
         "warnAsError": [
           "NU1605"
         ]
-      },
-      "restoreAuditProperties": {
-        "enableAudit": "true",
-        "auditLevel": "low",
-        "auditMode": "direct"
-      },
-      "SdkAnalysisLevel": "9.0.100"
+      }
     },
     "frameworks": {
       "net6.0": {
@@ -9199,7 +9194,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }

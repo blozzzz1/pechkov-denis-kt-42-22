@@ -91,6 +91,18 @@ namespace PechkovDenisKt_42_22.Controllers
         }
 
 
+        [HttpGet("second")]
+        public async Task<IActionResult> GetDepartmentsComplete(
+        [FromQuery] string? departmentName,
+        [FromQuery] string? teacherFirstName,
+        [FromQuery] string? teacherLastName,
+        [FromQuery] string? disciplineName)
+        {
+            var departments = await _departmentService.GetAllDepartmentsCompleteAsync(departmentName, teacherFirstName, teacherLastName, disciplineName);
+            return Ok(departments);
+        }
+
+
 
     }
 }
