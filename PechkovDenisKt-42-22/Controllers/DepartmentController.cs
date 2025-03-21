@@ -91,18 +91,19 @@ namespace PechkovDenisKt_42_22.Controllers
         }
 
 
-        [HttpGet("second")]
-        public async Task<IActionResult> GetDepartmentsComplete(
-        [FromQuery] string? departmentName,
-        [FromQuery] string? teacherFirstName,
-        [FromQuery] string? teacherLastName,
-        [FromQuery] string? disciplineName)
-        {
-            var departments = await _departmentService.GetAllDepartmentsCompleteAsync(departmentName, teacherFirstName, teacherLastName, disciplineName);
+
+
+
+        [HttpGet("zashita1")]
+         public async Task<IActionResult> Zashita1(
+         [FromQuery] string disciplineName, 
+         [FromQuery] int? minHours = null,
+         [FromQuery] int? maxHours = null)
+         {
+            
+            var departments = await _departmentService.Zashita1(disciplineName, minHours, maxHours);
             return Ok(departments);
-        }
-
-
+         }
 
     }
 }

@@ -5,6 +5,7 @@ using PechkovDenisKt_42_22.Models;
 using PechkovDenisKt_42_22.Interfaces;
 using PechkovDenisKt_42_22.Models.DTO;
 using System.Globalization;
+using Microsoft.IdentityModel.Tokens;
 
 namespace PechkovDenisKt_42_22.Services.DepartmentServices
 {
@@ -95,51 +96,34 @@ namespace PechkovDenisKt_42_22.Services.DepartmentServices
         }
 
 
-        public async Task<List<Department2Dto>> GetAllDepartmentsCompleteAsync(string departmentName, string teacherFirstName, string teacherLastName, string disciplineName)
+
+
+        public async Task<List<string>> Zashita1(
+        string disciplineName,
+        int? minHours = null,
+        int? maxHours = null)
         {
-            var query = _context.Departments
-                .Include(d => d.Head)
-                .Include(d => d.Teachers)
-                    .ThenInclude(t => t.Loads)
-                        .ThenInclude(l => l.Discipline)
-                .AsQueryable();
-
-            if (!string.IsNullOrEmpty(departmentName))
+            if (string.IsNullOrEmpty(disciplineName))
             {
-                query = query.Where(d => d.Name.Contains(departmentName));
+                throw new ArgumentException("Имя дисциплины обязательно для заполнения.", nameof(disciplineName));
             }
 
-            if (!string.IsNullOrEmpty(teacherFirstName))
-            {
-                query = query.Where(t => t.Teachers.Any(teacher => teacher.FirstName.Contains(teacherFirstName)));
-            }
-
-            if (!string.IsNullOrEmpty(teacherLastName))
-            {
-                query = query.Where(t => t.Teachers.Any(teacher => teacher.LastName.Contains(teacherLastName)));
-            }
-
-            if (!string.IsNullOrEmpty(disciplineName))
-            {
-                query = query.Where(t => t.Teachers.Any(teacher => teacher.Loads.Any(load => load.Discipline.Name.Contains(disciplineName))));
-            }
-
-            return await query.Select(d => new Department2Dto
-            {
-                Name = d.Name,
-                HeadName = d.Head != null ? $"{d.Head.FirstName} {d.Head.LastName}" : "Нет",
-                Teachers = d.Teachers.Select(t => new Teacher2Dto
-                {
-                    FirstName = t.FirstName,
-                    LastName = t.LastName,
-                    Disciplines = t.Loads.Select(l => new Discipline2Dto
-                    {
-                        Name = l.Discipline.Name,
-                        Hours = l.Hours
-                    }).ToList()
-                }).ToList()
-            }).ToListAsync();
+            return await (from department in _context.Departments
+                          join teacher in _context.Teachers on department.Id equals teacher.DepartmentId
+                          join load in _context.Loads on teacher.Id equals load.TeacherId
+                          join discipline in _context.Disciplines on load.DisciplineId equals discipline.Id
+                          where discipline.Name.Contains(disciplineName) &&
+                                (!minHours.HasValue || load.Hours >= minHours.Value) &&
+                                (!maxHours.HasValue || load.Hours <= maxHours.Value)
+                          select department.Name)
+                          .Distinct() 
+                          .ToListAsync();
         }
+
+
+    
+
+
 
     }
 
