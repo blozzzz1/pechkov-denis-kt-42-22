@@ -54,18 +54,35 @@ namespace PechkovDenisKt_42_22.Services.TeacherServices
             return teachers;
         }
 
-        public async Task<Teacher> GetTeacherByIdAsync(int id)
+        public async Task<TeacherDto> GetTeacherByIdAsync(int id)
         {
-            return await _context.Teachers
+            var teacher = await _context.Teachers
                 .Include(t => t.Degree)
                 .Include(t => t.Position)
                 .Include(t => t.Department)
                 .FirstOrDefaultAsync(t => t.Id == id);
+
+            if (teacher == null)
+            {
+                return null;
+            }
+
+            
+            return new TeacherDto
+            {
+                FirstName = teacher.FirstName,
+                LastName = teacher.LastName,
+                PositionId = teacher.PositionId,
+                DegreeId = teacher.DegreeId,
+                DepartmentId = teacher.DepartmentId
+            };
         }
 
         public async Task<TeacherResponseDto> AddTeacherAsync(string firstName, string lastName, int positionId, int degreeId, int? departmentId)
         {
+
             
+
             var positionExists = await _context.Positions.AnyAsync(p => p.Id == positionId);
             if (!positionExists)
             {
@@ -97,6 +114,11 @@ namespace PechkovDenisKt_42_22.Services.TeacherServices
                 DepartmentId = departmentId
             };
 
+            if (!teacher.IsValid())
+            {
+                throw new ArgumentException("Имя и фамилия преподавателя должны начинаться с заглавной буквы.");
+            }
+
             _context.Teachers.Add(teacher);
             await _context.SaveChangesAsync();
 
@@ -125,6 +147,7 @@ namespace PechkovDenisKt_42_22.Services.TeacherServices
 
         public async Task<TeacherResponseDto> UpdateTeacherAsync(int id, string firstName, string lastName, int positionId, int degreeId, int? departmentId)
         {
+
             
             var teacher = await _context.Teachers.FindAsync(id);
             if (teacher == null)
@@ -163,7 +186,11 @@ namespace PechkovDenisKt_42_22.Services.TeacherServices
             teacher.DegreeId = degreeId;
             teacher.DepartmentId = departmentId;
 
-            
+            if (!teacher.IsValid())
+            {
+                throw new ArgumentException("Имя и фамилия преподавателя должны начинаться с заглавной буквы.");
+            }
+
             await _context.SaveChangesAsync();
 
             

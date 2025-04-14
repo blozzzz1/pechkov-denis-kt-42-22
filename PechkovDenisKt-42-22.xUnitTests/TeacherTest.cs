@@ -8,6 +8,7 @@ using PechkovDenisKt_42_22.Database;
 using PechkovDenisKt_42_22.Models;
 using PechkovDenisKt_42_22.Models.DTO;
 using PechkovDenisKt_42_22.Services.TeacherServices;
+using System.ComponentModel.DataAnnotations;
 
 namespace PechkovDenisKt_42_22.xUnitTests
 {
@@ -202,6 +203,63 @@ namespace PechkovDenisKt_42_22.xUnitTests
                 Assert.Equal("John", result.FirstName);
                 Assert.Equal("Doe", result.LastName);
             }
+        }
+
+
+        [Fact]
+        public void Teacher_IsFirstNameCapitalized_ShouldReturnFalse_WhenFirstNameIsNotCapitalized()
+        {
+            var teacher = new Teacher
+            {
+                FirstName = "john",
+                LastName = "Doe"
+            };
+
+            var isValid = teacher.IsFirstNameValid();
+
+            Assert.False(isValid);
+        }
+
+        [Fact]
+        public void Teacher_IsFirstNameCapitalized_ShouldReturnFalse_WhenFirstNameHasSpaces()
+        {
+            var teacher = new Teacher
+            {
+                FirstName = "Jo hn",
+                LastName = "Doe"
+            };
+
+            var isValid = teacher.IsFirstNameValid();
+
+            Assert.False(isValid);
+        }
+
+        [Fact]
+        public void Teacher_IsFirstNameCapitalized_ShouldReturnTrue_WhenFirstNameIsCapitalized()
+        {
+            var teacher = new Teacher
+            {
+                FirstName = "John",
+                LastName = "Doe"
+            };
+
+            var isValid = teacher.IsFirstNameValid();
+
+            Assert.True(isValid);
+        }
+
+        [Fact]
+        public void Teacher_IsLastNameCapitalized_ShouldReturnFalse_WhenLastNameIsNotCapitalized()
+        {
+            var teacher = new Teacher
+            {
+                FirstName = "John",
+                LastName = "doe"
+            };
+
+            var isValid = teacher.IsLastNameValid();
+
+            Assert.False(isValid);
         }
     }
 }

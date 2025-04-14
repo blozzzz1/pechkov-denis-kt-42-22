@@ -49,12 +49,22 @@ namespace PechkovDenisKt_42_22.Services.DepartmentServices
 
         public async Task AddDepartmentAsync(Department department)
         {
+            if (!department.IsValidName())
+            {
+                throw new ArgumentException("Department name must contain 'Department' or 'Кафедра'.");
+            }
+
             _context.Departments.Add(department);
             await _context.SaveChangesAsync();
         }
 
         public async Task<Department> UpdateDepartmentAsync(Department department)
         {
+            if (!department.IsValidName())
+            {
+                throw new ArgumentException("Department name must contain 'Department' or 'Кафедра'.");
+            }
+
             var existingDepartment = await _context.Departments.FindAsync(department.Id);
             if (existingDepartment == null)
             {

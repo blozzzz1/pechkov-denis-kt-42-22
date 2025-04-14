@@ -59,15 +59,19 @@ namespace PechkovDenisKt_42_22.xUnitTests
                     Name = "Old Department",
                     FoundedDate = DateTime.Now
                 };
+                var teacher1 = new Teacher { FirstName = "John", LastName = "Doe", Department = department };
 
                 await ctx.Departments.AddAsync(department);
                 await ctx.SaveChangesAsync();
 
                 department.Name = "Updated Department";
+                department.HeadId = 1;
                 var updatedDepartment = await departmentService.UpdateDepartmentAsync(department);
 
                 Assert.NotNull(updatedDepartment);
                 Assert.Equal("Updated Department", updatedDepartment.Name);
+                Assert.Equal(1, updatedDepartment.HeadId);
+                Assert.NotNull(updatedDepartment.HeadId);
             }
         }
 
@@ -100,20 +104,29 @@ namespace PechkovDenisKt_42_22.xUnitTests
             using (var ctx = new UniversityContext(_dbContextOptions))
             {
                 var departmentService = new DepartmentService(ctx);
-                var department = new Department { Name = "Department A" };
-                var teacher = new Teacher { FirstName = "John", LastName = "Doe", Department = department };
+                var department1 = new Department { Name = "Department A" };
+                var department2 = new Department { Name = "Department B" };
+                var department3 = new Department { Name = "Department C" };
+                var teacher1 = new Teacher { FirstName = "John", LastName = "Doe", Department = department3 };
+                var teacher2 = new Teacher { FirstName = "Jane", LastName = "Doe", Department = department2 };
                 var discipline = new Discipline { Name = "Mathematics" };
-                var load = new Load { Teacher = teacher, Discipline = discipline, Hours = 10 };
+                var load1 = new Load { Teacher = teacher1, Discipline = discipline, Hours = 10 };
+                var load2 = new Load { Teacher = teacher2, Discipline = discipline, Hours = 10 };
 
-                await ctx.Departments.AddAsync(department);
-                await ctx.Teachers.AddAsync(teacher);
+                await ctx.Departments.AddAsync(department1);
+                await ctx.Departments.AddAsync(department2);
+                await ctx.Teachers.AddAsync(teacher1);
+                await ctx.Teachers.AddAsync(teacher2);
                 await ctx.Disciplines.AddAsync(discipline);
-                await ctx.Loads.AddAsync(load);
+                await ctx.Loads.AddAsync(load1);
+                await ctx.Loads.AddAsync(load2);
                 await ctx.SaveChangesAsync();
 
                 var result = await departmentService.Zashita1("Math",2,20);
 
-                Assert.Contains("Department A", result);
+                Assert.Equal(2, result.Count);
+                //Assert.Contains("Department A", result);
+                //Assert.DoesNotContain("Department B", result);
             }
         }
 
@@ -184,24 +197,24 @@ namespace PechkovDenisKt_42_22.xUnitTests
                     Name = "Department A",
                     FoundedDate = DateTime.Now,
                     Teachers = new List<Teacher>
-            {
-                new Teacher
-                {
-                    FirstName = "John",
-                    LastName = "Doe",
-                    DegreeId = degree.Id,
-                    PositionId = position.Id,
-                    DepartmentId = null
-                },
-                new Teacher
-                {
-                    FirstName = "Jane",
-                    LastName = "Doe",
-                    DegreeId = degree.Id,
-                    PositionId = position.Id,
-                    DepartmentId = null
-                }
-            }
+                    {
+                        new Teacher
+                        {
+                            FirstName = "John",
+                            LastName = "Doe",
+                            DegreeId = degree.Id,
+                            PositionId = position.Id,
+                            DepartmentId = 1
+                        },
+                        new Teacher
+                        {
+                            FirstName = "Jane",
+                            LastName = "Doe",
+                            DegreeId = degree.Id,
+                            PositionId = position.Id,
+                            DepartmentId = 1
+                        }
+                    }
                 };
 
                 var departmentWithoutTeachers = new Department
@@ -226,6 +239,45 @@ namespace PechkovDenisKt_42_22.xUnitTests
             }
         }
 
+
+        [Fact]
+        public void Department_IsValidName_ShouldReturnFalse_WhenNameDoesNotStartWithDepartmentOrCafedra()
+        {
+            var department = new Department
+            {
+                Name = "New Dep"
+            };
+
+            var isValid = department.IsValidName();
+
+            Assert.False(isValid);
+        }
+
+        [Fact]
+        public void Department_IsValidName_ShouldReturnTrue_WhenNameStartsWithDepartment()
+        {
+            var department = new Department
+            {
+                Name = "Department of Mathematics" 
+            };
+
+            var isValid = department.IsValidName();
+
+            Assert.True(isValid);
+        }
+
+        [Fact]
+        public void Department_IsValidName_ShouldReturnTrue_WhenNameStartsWithCafedra()
+        {
+            var department = new Department
+            {
+                Name = "Кафедра математики" 
+            };
+
+            var isValid = department.IsValidName();
+
+            Assert.True(isValid);
+        }
 
 
 

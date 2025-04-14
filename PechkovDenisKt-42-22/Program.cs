@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using NLog;
 using NLog.Web;
 using PechkovDenisKt_42_22.Database;
+using PechkovDenisKt_42_22.Middleware;
 using PechkovDenisKt_42_22.ServiceExtensions;
 
 
@@ -35,6 +36,8 @@ try {
         app.UseSwagger();
         app.UseSwaggerUI();
     }
+
+    app.UseMiddleware<ExceptionHandlerMiddleware>();
 
     app.UseAuthorization();
 
